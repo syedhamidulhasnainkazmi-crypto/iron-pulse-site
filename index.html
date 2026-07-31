@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#e62b2b">
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Iron Pulse">
+  <title>Iron Pulse Fitness</title>
+  <!-- Google Fonts: Oswald (headings) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #1a1616;
+      color: #f0ece9;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, .logo, .tagline, .stat-number, .pricing-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 10, 10, 0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 2px solid #cc1f1f;
+      padding: 10px 0;
+    }
+
+    .nav-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo-small {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #f0ece9;
+      letter-spacing: 2px;
+    }
+
+    .logo-small span {
+      color: #e62b2b;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #f0ece9;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links a:hover {
+      color: #e62b2b;
+      border-bottom-color: #e62b2b;
+    }
+
+    .hero {
+      background: linear-gradient(145deg, rgba(20,5,5,0.55), rgba(20,5,5,0.5)), url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1600&auto=format') center/cover no-repeat;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .hero-content {
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(20,10,10,0.55);
+      backdrop-filter: blur(4px);
+      padding: 3rem 2.5rem;
+      border-radius: 28px;
+      border-left: 4px solid #e62b2b;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .hero h1 {
+      font-size: 4.2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 3px;
+    }
+
+    .hero h1 span {
+      color: #e62b2b;
+    }
+
+    .hero .tagline {
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: #f0ece9;
+      margin: 0.2rem 0 1.8rem;
+      letter-spacing: 2px;
+    }
+
+    .btn-primary {
+      background: #e62b2b;
+      border: none;
+      padding: 16px 48px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #fff;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: 0 4px 20px rgba(230, 43, 43, 0.3);
+      font-family: 'Oswald', sans-serif;
+      display: inline-block;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary:hover {
+      background: #c41f1f;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(230, 43, 43, 0.4);
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: #f0ece9;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .section-title span {
+      color: #e62b2b;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: #b0a8a0;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+    }
+
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-text {
+      flex: 1 1 300px;
+      font-size: 1.05rem;
+      color: #d6cec6;
+    }
+
+    .about-stats {
+      flex: 1 1 300px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 1.5rem;
+      background: #221d1d;
+      padding: 2rem 1.5rem;
+      border-radius: 40px;
+      border: 1px solid #3a2f2f;
+    }
+
+    .stat-item {
+      text-align: center;
+      min-width: 100px;
+    }
+
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #e62b2b;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #b0a8a0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .service-card {
+      background: #221d1d;
+      padding: 1.8rem 1.2rem;
+      border-radius: 28px;
+      text-align: center;
+      transition: 0.25s ease;
+      border: 1px solid #3a2f2f;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: #e62b2b;
+      box-shadow: 0 12px 30px rgba(230, 43, 43, 0.08);
+    }
+
+    .service-icon {
+      font-size: 2.8rem;
+      margin-bottom: 0.3rem;
+      display: inline-block;
+    }
+
+    .service-card h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #f0ece9;
+      letter-spacing: 0.5px;
+    }
+
+    .service-price {
+      font-weight: 600;
+      color: #e62b2b;
+      margin: 0.25rem 0;
+      font-size: 1.1rem;
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: #b0a8a0;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 24px;
+      transition: 0.2s;
+      border: 1px solid #2b1f1f;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.02);
+      border-color: #e62b2b;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: #221d1d;
+      padding: 1.5rem;
+      border-radius: 28px;
+      border: 1px solid #3a2f2f;
+      transition: 0.2s;
+    }
+
+    .testimonial-card:hover {
+      border-color: #e62b2b;
+    }
+
+    .stars {
+      color: #e62b2b;
+      letter-spacing: 2px;
+    }
+
+    .client-name {
+      font-weight: 600;
+      color: #f0ece9;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      background: #221d1d;
+      padding: 2rem 1.5rem;
+      border-radius: 32px;
+      text-align: center;
+      border: 1px solid #3a2f2f;
+      transition: 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card:hover {
+      border-color: #e62b2b;
+      transform: translateY(-5px);
+    }
+
+    .pricing-card.popular {
+      border: 2px solid #e62b2b;
+      position: relative;
+    }
+
+    .popular-badge {
+      background: #e62b2b;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 16px;
+      border-radius: 40px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .pricing-title {
+      font-size: 1.8rem;
+      color: #f0ece9;
+    }
+
+    .pricing-price {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #e62b2b;
+      font-family: 'Oswald', sans-serif;
+      margin: 0.5rem 0;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #b0a8a0;
+      flex: 1;
+    }
+
+    .pricing-features li {
+      padding: 4px 0;
+      border-bottom: 1px solid #2b1f1f;
+    }
+
+    .pricing-card .btn-primary {
+      padding: 10px 24px;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .contact-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      background: #221d1d;
+      padding: 2rem;
+      border-radius: 48px;
+      border: 1px solid #3a2f2f;
+    }
+
+    .contact-info {
+      flex: 1 1 300px;
+    }
+
+    .contact-info p {
+      margin: 0.5rem 0;
+    }
+
+    .contact-info table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    .contact-info td {
+      padding: 6px 0;
+      border-bottom: 1px solid #2b1f1f;
+    }
+
+    .contact-form {
+      flex: 1 1 300px;
+    }
+
+    .contact-form input, .contact-form select, .contact-form textarea {
+      width: 100%;
+      padding: 14px 18px;
+      margin: 8px 0;
+      border: 1px solid #2b1f1f;
+      border-radius: 40px;
+      font-family: 'Inter', sans-serif;
+      background: #0b0a0a;
+      color: #f0ece9;
+      transition: 0.2s;
+    }
+
+    .contact-form textarea {
+      border-radius: 24px;
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
+      outline: 2px solid #e62b2b;
+      border-color: transparent;
+    }
+
+    .contact-form .btn-primary {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #25D366;
+      color: #fff;
+      border-radius: 60px;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.25);
+      text-decoration: none;
+      z-index: 50;
+      transition: 0.2s;
+      font-size: 1rem;
+      border: none;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.03);
+      background: #20b85f;
+    }
+
+    footer {
+      background: #0f0d0d;
+      padding: 2rem 0;
+      text-align: center;
+      border-top: 1px solid #2b1f1f;
+      color: #b0a8a0;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 1.8rem;
+      margin: 0.8rem 0;
+    }
+
+    .social-links a {
+      color: #b0a8a0;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      color: #e62b2b;
+    }
+
+    .footer-small {
+      font-size: 0.8rem;
+      opacity: 0.6;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .hero {
+        min-height: 70vh;
+      }
+      .hero h1 {
+        font-size: 2.4rem;
+        letter-spacing: 1.5px;
+      }
+      .hero .tagline {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+      }
+      .hero-content {
+        padding: 2rem 1.5rem;
+      }
+      .nav-links {
+        gap: 0.9rem;
+        font-size: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 6px;
+      }
+      .logo-small {
+        font-size: 1.4rem;
+      }
+      .contact-wrap {
+        padding: 1.2rem;
+      }
+      .whatsapp-float {
+        bottom: 16px;
+        right: 16px;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      section {
+        padding: 2.5rem 0;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .hero-content {
+        padding: 1.5rem 1.2rem;
+        border-radius: 20px;
+      }
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+      .hero .tagline {
+        font-size: 1rem;
+      }
+      .btn-primary {
+        padding: 12px 32px;
+        font-size: 0.95rem;
+      }
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .gallery-grid img {
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-flex">
+      <span class="logo-small">Iron <span>Pulse</span></span>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#classes">Classes</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+        <a href="signin.html" id="authLink">Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <h1>Iron <span>Pulse</span> Fitness</h1>
+      <p class="tagline">Train Hard. Live Strong.</p>
+      <a href="#contact" class="btn-primary">Start Your Free Trial</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About <span>Us</span></h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Community-driven gym with 6 years of forging real results. Our expert trainers combine science and grit to help you break limits — whether you're a beginner or elite.</p>
+          <p style="margin-top: 0.8rem;">Join a tribe that pushes harder, together.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-item"><span class="stat-number">6+</span><div class="stat-label">Years Running</div></div>
+          <div class="stat-item"><span class="stat-number">1000+</span><div class="stat-label">Members Trained</div></div>
+          <div class="stat-item"><span class="stat-number">🏅</span><div class="stat-label">Certified Trainers</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="classes" style="background: #1f1a1a;">
+    <div class="container">
+      <h2 class="section-title">Our <span>Classes</span></h2>
+      <p class="section-sub">Fuel your fire with our signature training.</p>
+      <div class="services-grid">
+        <div class="service-card"><div class="service-icon">🏋️</div><h4>Personal Training</h4><div class="service-price">from £30/session</div><div class="service-desc">1-on-1 bespoke coaching</div></div>
+        <div class="service-card"><div class="service-icon">🔥</div><h4>Group HIIT Classes</h4><div class="service-price">from £15/class</div><div class="service-desc">High intensity, max burn</div></div>
+        <div class="service-card"><div class="service-icon">💪</div><h4>Strength &amp; Conditioning</h4><div class="service-price">from £20/class</div><div class="service-desc">Build raw power &amp; endurance</div></div>
+        <div class="service-card"><div class="service-icon">🧘</div><h4>Yoga &amp; Mobility</h4><div class="service-price">from £12/class</div><div class="service-desc">Recover &amp; improve flexibility</div></div>
+        <div class="service-card"><div class="service-icon">🥗</div><h4>Nutrition Coaching</h4><div class="service-price">from £40/month</div><div class="service-desc">Fuel your transformation</div></div>
+        <div class="service-card"><div class="service-icon">🏛️</div><h4>Open Gym Access</h4><div class="service-price">from £35/month</div><div class="service-desc">Full equipment, anytime</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="container">
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&auto=format" alt="gym equipment">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&auto=format" alt="weightlifting">
+        <img src="https://images.unsplash.com/photo-1571388208497-71bedc66e932?w=500&auto=format" alt="group fitness">
+        <img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=500&auto=format" alt="kettlebell">
+        <img src="https://images.unsplash.com/photo-1517130038641-a774d04afb3c?w=500&auto=format" alt="training">
+        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&auto=format" alt="boxing">
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" style="background: #1f1a1a;">
+    <div class="container">
+      <h2 class="section-title">Member <span>Reviews</span></h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p>"Dropped 12kg in 3 months. The trainers actually care about your form and progress."</p><div class="client-name">— Dan M.</div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p>"Best HIIT classes in Manchester. Intense, fun, and the community is unreal."</p><div class="client-name">— Priya K.</div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><p>"Iron Pulse changed my mindset. From beginner to lifting heavy — they guided every step."</p><div class="client-name">— James W.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <h2 class="section-title">Membership <span>Plans</span></h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-title">Basic</div>
+          <div class="pricing-price">£25<span style="font-size:1rem; color:#b0a8a0;">/mo</span></div>
+          <ul class="pricing-features">
+            <li>Open gym access</li>
+            <li>Locker & shower</li>
+            <li>Mobile app tracking</li>
+          </ul>
+          <a href="#contact" class="btn-primary" style="padding:10px 20px; font-size:0.9rem;">Join Now</a>
+        </div>
+
+        <div class="pricing-card popular">
+          <div class="popular-badge">Most Popular</div>
+          <div class="pricing-title">Pro</div>
+          <div class="pricing-price">£45<span style="font-size:1rem; color:#b0a8a0;">/mo</span></div>
+          <ul class="pricing-features">
+            <li>Everything in Basic</li>
+            <li>2 group classes/week</li>
+            <li>1 nutrition check-in</li>
+            <li>Sauna access</li>
+          </ul>
+          <a href="#contact" class="btn-primary" style="padding:10px 20px; font-size:0.9rem;">Join Now</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-title">Elite</div>
+          <div class="pricing-price">£70<span style="font-size:1rem; color:#b0a8a0;">/mo</span></div>
+          <ul class="pricing-features">
+            <li>Everything in Pro</li>
+            <li>Unlimited classes</li>
+            <li>Personal training session</li>
+            <li>Priority booking</li>
+            <li>Guest passes</li>
+          </ul>
+          <a href="#contact" class="btn-primary" style="padding:10px 20px; font-size:0.9rem;">Join Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="background: #1f1a1a;">
+    <div class="container">
+      <h2 class="section-title">Get <span>Started</span></h2>
+      <div class="contact-wrap">
+        <div class="contact-info">
+          <p><strong>📍</strong> 45 Ironworks Road, Manchester, M4 5DX, UK</p>
+          <p><strong>📞</strong> +44 7922 654321</p>
+          <p><strong>✉️</strong> info@ironpulsefitness.co.uk</p>
+          <table>
+            <tr><td>Mon – Fri</td><td>6:00 AM – 10:00 PM</td></tr>
+            <tr><td>Sat – Sun</td><td>8:00 AM – 8:00 PM</td></tr>
+          </table>
+          <div style="margin: 1rem 0; border-radius: 24px; overflow: hidden; height: 160px; background: #1f1818;">
+            <iframe width="100%" height="160" style="border:0;" loading="lazy" src="https://maps.google.com/maps?q=45+Ironworks+Road+Manchester+M4+5DX&output=embed"></iframe>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="tel" placeholder="Phone Number" required>
+            <input type="email" placeholder="Email Address" required>
+            <select>
+              <option>Basic</option>
+              <option selected>Pro (Most Popular)</option>
+              <option>Elite</option>
+            </select>
+            <textarea placeholder="Your message / goals..."></textarea>
+            <button type="submit" class="btn-primary">Start Free Trial</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div style="font-family: 'Oswald', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: #f0ece9;">Iron <span style="color:#e62b2b;">Pulse</span> Fitness</div>
+      <div class="social-links">
+        <a href="#" aria-label="Instagram">📸</a>
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="WhatsApp">💬</a>
+      </div>
+      <div>© 2026 Iron Pulse Fitness. All rights reserved.</div>
+      <div class="footer-small">Website by <strong>Hamid Kazmi</strong></div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/447922654321?text=Hello%20Iron%20Pulse!%20I'm%20ready%20to%20train%20hard." class="whatsapp-float" target="_blank" rel="noopener">
+    <span style="font-size: 1.6rem;">💬</span> Chat Now
+  </a>
+
+  <script>
+    (function() {
+      // Show "Hi, Name | Log Out" in the navbar if the visitor is signed in
+      const stored = localStorage.getItem('ironPulseUser');
+      const authLink = document.getElementById('authLink');
+      if (stored && authLink) {
+        try {
+          const user = JSON.parse(stored);
+          authLink.textContent = `Hi, ${user.name.split(' ')[0]}`;
+          authLink.href = '#';
+          authLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (confirm('Log out?')) {
+              localStorage.removeItem('ironPulseUser');
+              window.location.reload();
+            }
+          });
+        } catch (e) {}
+      }
+    })();
+
+    (function() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

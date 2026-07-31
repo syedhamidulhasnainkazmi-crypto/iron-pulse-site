@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="96" fill="#1a1616"/>
+  <!-- Dumbbell -->
+  <g stroke="#f0ece9" stroke-width="18" stroke-linecap="round">
+    <line x1="146" y1="256" x2="366" y2="256"/>
+  </g>
+  <rect x="118" y="206" width="34" height="100" rx="10" fill="#f0ece9"/>
+  <rect x="100" y="226" width="20" height="60" rx="8" fill="#f0ece9"/>
+  <rect x="360" y="206" width="34" height="100" rx="10" fill="#f0ece9"/>
+  <rect x="392" y="226" width="20" height="60" rx="8" fill="#f0ece9"/>
+  <!-- Pulse line through the middle, in red -->
+  <polyline points="176,256 216,256 236,196 268,316 288,256 336,256"
+            fill="none" stroke="#e62b2b" stroke-width="14"
+            stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

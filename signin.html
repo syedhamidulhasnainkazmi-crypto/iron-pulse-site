@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In | Iron Pulse Fitness</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#e62b2b">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Inter', sans-serif;
+    background:#1a1616;
+    color:#f0ece9;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:2rem 1rem;
+  }
+  .auth-card {
+    width:100%;
+    max-width:420px;
+    background:#221d1d;
+    border:1px solid #3a2f2f;
+    border-radius:28px;
+    padding:2.5rem 2rem;
+    box-shadow:0 20px 60px rgba(0,0,0,0.4);
+  }
+  .logo-link {
+    display:block;
+    text-align:center;
+    font-family:'Oswald', sans-serif;
+    font-size:1.8rem;
+    font-weight:700;
+    letter-spacing:2px;
+    text-decoration:none;
+    color:#f0ece9;
+    margin-bottom:1.8rem;
+    text-transform:uppercase;
+  }
+  .logo-link span { color:#e62b2b; }
+  h1 {
+    font-family:'Oswald', sans-serif;
+    font-size:1.6rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    text-align:center;
+    margin-bottom:0.4rem;
+  }
+  .sub {
+    text-align:center;
+    color:#b0a8a0;
+    font-size:0.9rem;
+    margin-bottom:1.8rem;
+  }
+  form { display:flex; flex-direction:column; gap:1rem; }
+  input {
+    background:#1a1616;
+    border:1px solid #3a2f2f;
+    border-radius:12px;
+    padding:14px 16px;
+    color:#f0ece9;
+    font-family:'Inter', sans-serif;
+    font-size:0.95rem;
+  }
+  input:focus { outline:none; border-color:#e62b2b; }
+  .btn-primary {
+    background:#e62b2b;
+    border:none;
+    padding:14px;
+    font-size:1rem;
+    font-weight:600;
+    text-transform:uppercase;
+    color:#fff;
+    border-radius:60px;
+    cursor:pointer;
+    transition:0.25s ease;
+    font-family:'Oswald', sans-serif;
+    letter-spacing:1px;
+    margin-top:0.5rem;
+  }
+  .btn-primary:hover { background:#c41f1f; }
+  .btn-primary:disabled { opacity:0.6; cursor:not-allowed; }
+  .switch-link {
+    text-align:center;
+    margin-top:1.5rem;
+    font-size:0.9rem;
+    color:#b0a8a0;
+  }
+  .switch-link a { color:#e62b2b; text-decoration:none; font-weight:600; }
+  .msg {
+    text-align:center;
+    font-size:0.9rem;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:1rem;
+    display:none;
+  }
+  .msg.error { background:rgba(230,43,43,0.15); color:#ff8b8b; display:block; }
+  .msg.success { background:rgba(60,180,90,0.15); color:#8be8a0; display:block; }
+</style>
+</head>
+<body>
+  <div class="auth-card">
+    <a href="index.html" class="logo-link">Iron <span>Pulse</span></a>
+    <h1>Welcome Back</h1>
+    <p class="sub">Sign in to your account.</p>
+    <div id="msg" class="msg"></div>
+    <form id="signinForm">
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit" class="btn-primary" id="submitBtn">Sign In</button>
+    </form>
+    <div class="switch-link">New here? <a href="signup.html">Create an Account</a></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('signinForm');
+    const msg = document.getElementById('msg');
+    const btn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.className = 'msg';
+      msg.textContent = '';
+      btn.disabled = true;
+      btn.textContent = 'Signing In...';
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          msg.className = 'msg error';
+          msg.textContent = data.error || 'Something went wrong.';
+        } else {
+          // Simple client-side session flag for this static site.
+          localStorage.setItem('ironPulseUser', JSON.stringify({ name: data.name, email: data.email }));
+          msg.className = 'msg success';
+          msg.textContent = 'Welcome back! Redirecting...';
+          setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+        }
+      } catch (err) {
+        msg.className = 'msg error';
+        msg.textContent = 'Network error. Please try again.';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign In';
+      }
+    });
+  </script>
+</body>
+</html>
